@@ -156,7 +156,7 @@ export default function App() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="w-full flex justify-center pb-4"
+            className="w-full flex justify-center pb-4 mix-blend-difference"
           >
             <h2 className="text-[22vw] leading-none font-semibold tracking-tighter text-white select-none">
               Harvey
