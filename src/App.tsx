@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, ArrowRight, User, Image as ImageIcon, Video, MessageSquare, Mail, MoreHorizontal, CheckCircle2, Search, Bell, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Menu, ArrowRight, User, Image as ImageIcon, Video, MessageSquare, Mail, MoreHorizontal, CheckCircle2, Search, Bell, Facebook, Instagram, Linkedin, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const testimonials = [
@@ -58,6 +58,7 @@ const GRAPHIC_PROJECTS = [
     description: "A high-impact personal experimental project featuring Darna, focused on motion and visual composite.",
     image: "/works/Images/Carousels/Darna/Darna GIF.mp4",
     images: [
+      "/works/Images/Carousels/Darna/carousels-darna-p1-main.png",
       "/works/Images/Carousels/Darna/carousels-darna-p1-slide1.png",
       "/works/Images/Carousels/Darna/carousels-darna-p1-slide2.png",
       "/works/Images/Carousels/Darna/carousels-darna-p1-slide3.png",
@@ -377,6 +378,16 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [visibleItems, setVisibleItems] = useState(6);
+  const [likedProjects, setLikedProjects] = useState<Record<number, boolean>>(() => {
+    const saved = localStorage.getItem('harvey_portfolio_likes');
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  const toggleLike = (id: number) => {
+    const newLikes = { ...likedProjects, [id]: !likedProjects[id] };
+    setLikedProjects(newLikes);
+    localStorage.setItem('harvey_portfolio_likes', JSON.stringify(newLikes));
+  };
 
   const filteredProjects = GRAPHIC_PROJECTS.filter(p => 
     selectedCategory === 'All' || p.category === selectedCategory
@@ -505,9 +516,9 @@ export default function App() {
                   className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/10 p-1.5 pr-6 rounded-full hover:bg-white/20 transition-colors group cursor-pointer"
                 >
                   <div className="bg-white text-black p-2 rounded-full group-hover:scale-105 transition-transform">
-                    <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
+                    <ArrowRight className="w-5 shadow-[0_0_15px_rgba(255,255,255,0.4)] h-5" strokeWidth={2.5} />
                   </div>
-                  <span className="font-medium text-base">Go to Dashboard</span>
+                  <span className="font-medium text-base">Explore My Dashboard</span>
                 </button>
               </motion.div>
 
@@ -570,7 +581,10 @@ export default function App() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(45,212,191,0.2),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <h3 className="font-bold text-sm mb-2 text-white/90 uppercase tracking-wider">Available Now</h3>
             <p className="text-xs text-white/60 mb-4 leading-relaxed">Let's collaborate on your next big project.</p>
-            <button className="w-full py-2.5 bg-gradient-to-r from-purple-600 to-teal-500 rounded-lg text-xs font-bold shadow-lg hover:shadow-purple-500/25 transition-all">
+            <button 
+              onClick={() => setActiveTab('Contact')}
+              className="w-full py-2.5 bg-gradient-to-r from-purple-600 to-teal-500 rounded-lg text-xs font-bold shadow-lg hover:shadow-purple-500/25 transition-all"
+            >
               HIRE ME
             </button>
           </div>
@@ -1149,14 +1163,17 @@ export default function App() {
                           <span className="text-sm font-semibold text-white/80">{selectedProject.platform}</span>
                         </div>
 
-                        <a 
-                          href={selectedProject.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full py-4 bg-white text-black rounded-2xl font-black uppercase tracking-[2px] text-xs flex items-center justify-center gap-2 hover:bg-purple-500 hover:text-white transition-all duration-300"
+                        <button 
+                          onClick={() => toggleLike(selectedProject.id)}
+                          className={`w-full py-4 rounded-2xl font-black uppercase tracking-[2px] text-xs flex items-center justify-center gap-3 transition-all duration-300 ${
+                            likedProjects[selectedProject.id]
+                            ? 'bg-red-500/20 text-red-500 border border-red-500/50'
+                            : 'bg-white/5 text-white/40 border border-white/10 hover:border-purple-500 hover:text-white'
+                          }`}
                         >
-                          View Project <ArrowRight className="w-4 h-4" />
-                        </a>
+                          <Heart className={`w-5 h-5 ${likedProjects[selectedProject.id] ? 'fill-current' : ''}`} />
+                          {likedProjects[selectedProject.id] ? 'Liked!' : 'Like this Project'}
+                        </button>
                       </div>
                     </div>
                   </motion.div>
@@ -1188,7 +1205,7 @@ export default function App() {
                   <h2 className="text-5xl md:text-6xl font-black leading-none tracking-tighter" style={{ fontFamily: 'Impact, sans-serif' }}>
                     <span className="text-purple-400">GRAPHIC</span> <span className="text-white">DESIGN</span><br />
                     <span className="text-purple-400">VIDEO</span> <span className="text-white">EDITING</span><br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400 italic" style={{ WebkitTextStroke: '1px #d946ef' }}>SERVICES</span>
+                    <span className="text-white bg-clip-text italic drop-shadow-[0_0_10px_rgba(217,70,239,0.5)]" style={{ WebkitTextStroke: '1px #d946ef' }}>SERVICES</span>
                   </h2>
                 </div>
                 
@@ -1197,7 +1214,10 @@ export default function App() {
                   <p className="text-white/80 mb-6 leading-relaxed">
                     If you see something you like, imagine what we could build together.
                   </p>
-                  <button className="bg-[#d946ef] hover:bg-[#c026d3] text-white px-8 py-3 rounded-full font-bold tracking-wider uppercase transition-colors shadow-[0_0_15px_rgba(217,70,239,0.4)]">
+                  <button 
+                    onClick={() => setActiveTab('Contact')}
+                    className="bg-[#d946ef] hover:bg-[#c026d3] text-white px-8 py-3 rounded-full font-bold tracking-wider uppercase transition-colors shadow-[0_0_15px_rgba(217,70,239,0.4)]"
+                  >
                     LET'S TALK
                   </button>
                 </div>
@@ -1223,9 +1243,7 @@ export default function App() {
                   <a href="#" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
                     <Instagram className="w-4 h-4 text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
-                    <Twitter className="w-4 h-4 text-white" />
-                  </a>
+
                   <a href="#" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
                     <Linkedin className="w-4 h-4 text-white" />
                   </a>
@@ -1233,7 +1251,7 @@ export default function App() {
               </div>
               
               <div className="text-center mt-12 text-xs text-white/40">
-                All Rights Reserved © : Harvey Lingad Personal Portfolio 2025
+                All Rights Reserved © : Harvey Lingad Personal Portfolio 2026
               </div>
             </div>
           </footer>
