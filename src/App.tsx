@@ -57,16 +57,18 @@ export default function App() {
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-[#0a0a0a]">
           {/* 
-            To use your exact uploaded image:
+            To use your exact uploaded video:
             1. Create a 'public' folder in the file explorer (if it doesn't exist)
-            2. Upload your image there and name it 'background.jpg'
-            3. Change the src below to '/background.jpg'
+            2. Upload your webm file there and name it 'background.webm'
+            3. Change the src below to '/background.webm'
           */}
-          <img
-            src="/background.jpg"
-            alt="Background portrait"
+          <video
+            src="/background.webm"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-luminosity"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-teal-900/30 z-0 mix-blend-overlay"></div>
           {/* Vignette effect */}
