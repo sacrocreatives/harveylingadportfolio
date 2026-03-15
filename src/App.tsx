@@ -245,10 +245,19 @@ export default function App() {
             <div className="p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
               {/* Experience Column */}
               <div className="lg:col-span-6 flex flex-col gap-6">
-                <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 backdrop-blur-sm h-full">
-                  <h3 className="text-2xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400" style={{ fontFamily: 'Impact, sans-serif', letterSpacing: '2px' }}>EXPERIENCE</h3>
+                {/* About Profile Photo */}
+                <div className="bg-white/[0.03] border border-white/10 rounded-3xl overflow-hidden h-64 md:h-80 lg:h-96">
+                  <img 
+                    src="/about-me.jpg" 
+                    alt="Harvey Lingad" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 backdrop-blur-sm">
+                  <h3 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400" style={{ fontFamily: 'Impact, sans-serif', letterSpacing: '2px' }}>EXPERIENCE</h3>
                   
-                  <div className="flex flex-col gap-8 relative">
+                  <div className="flex flex-col gap-4 relative">
                     {/* Timeline line */}
                     <div className="absolute left-[4.5rem] top-2 bottom-2 w-px bg-white/10"></div>
                     
