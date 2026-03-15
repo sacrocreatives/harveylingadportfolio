@@ -370,6 +370,36 @@ const GRAPHIC_PROJECTS = [
   }
 ];
 
+const VIDEO_CASE_STUDIES = [
+  {
+    id: 1,
+    label: "CASE STUDY 01",
+    title: "Real Estate Video Ads",
+    summary: "Produced a series of high-conversion short-form video ads for a real estate company, strategically crafted for Meta & Tiktok Ads. The campaign significantly boosted lead generation with a focused creative direction.",
+    highlights: ["120+ Leads Generated", "15% Conversion Rate", "Meta & TikTok Optimized"],
+    image: "/works/Video/case-1-hero.jpg",
+    link: "#"
+  },
+  {
+    id: 2,
+    label: "CASE STUDY 02",
+    title: "Smart Cuts Storytelling",
+    summary: "A masterclass in repurposing long-form content into engaging short-form snippets. Tasked with trimming 30-minute videos without losing the core narrative arc and impact.",
+    highlights: ["Multi-platform Ready", "Narrative Focused", "High Retension Edits"],
+    image: "/works/Video/case-2-hero.jpg",
+    link: "#"
+  },
+  {
+    id: 3,
+    label: "CAMPAIGN WORK",
+    title: "Recruitment Strategy",
+    summary: "Executed a high-performing recruitment campaign in-house, collaborating with cross-border teams to drive 148 potential agents through strategic ad buying and WhatsApp outreach.",
+    highlights: ["148 Potential Agents", "WhatsApp Integrated", "Remote Team Success"],
+    image: "/works/Video/case-3-hero.jpg",
+    link: "#"
+  }
+];
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('About');
   const [formState, setFormState] = useState({ name: '', email: '', projectType: '', budget: '', timeline: '', message: '' });
@@ -382,6 +412,8 @@ export default function App() {
     const saved = localStorage.getItem('harvey_portfolio_likes');
     return saved ? JSON.parse(saved) : {};
   });
+  const [currentVideoSlide, setCurrentVideoSlide] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleLike = (id: number) => {
     const newLikes = { ...likedProjects, [id]: !likedProjects[id] };
@@ -424,7 +456,45 @@ export default function App() {
 
   return (
     <div className="relative w-full bg-[#0a0a0a] text-white font-sans flex flex-col">
-      {/* --- HERO SECTION --- */}
+        {/* Mobile Navigation Overlay */}
+        {isMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-8"
+          >
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-10 right-10 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+            >
+              <MoreHorizontal className="w-6 h-6 rotate-45" />
+            </button>
+            
+            <div className="flex flex-col gap-8 text-center">
+              {sidebarItems.map((item, idx) => (
+                <motion.button
+                  key={item.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  onClick={() => {
+                    setActiveTab(item.name);
+                    setIsMenuOpen(false);
+                    scrollToDashboard();
+                  }}
+                  className={`text-3xl font-black uppercase tracking-tighter transition-all italic ${
+                    activeTab === item.name ? 'text-purple-500 scale-110' : 'text-white/40 hover:text-white'
+                  }`}
+                  style={{ fontFamily: 'Impact, sans-serif' }}
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen w-full overflow-hidden flex flex-col">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-[#0a0a0a]">
@@ -457,7 +527,10 @@ export default function App() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex justify-end w-full"
           >
-            <button className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/10 px-6 py-2.5 rounded-full hover:bg-white/20 transition-colors">
+            <button 
+              onClick={() => setIsMenuOpen(true)}
+              className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/10 px-6 py-2.5 rounded-full hover:bg-white/20 transition-colors"
+            >
               <div className="w-4 h-4 rounded-full bg-gradient-to-br from-purple-800 to-red-600 shadow-inner"></div>
               <span className="text-lg font-light tracking-wide">Harvey</span>
               <Menu className="w-6 h-6 ml-2 opacity-80" strokeWidth={1.5} />
@@ -511,15 +584,30 @@ export default function App() {
                   </div>
                 </div>
 
-                <button 
-                  onClick={scrollToDashboard}
-                  className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/10 p-1.5 pr-6 rounded-full hover:bg-white/20 transition-colors group cursor-pointer"
-                >
-                  <div className="bg-white text-black p-2 rounded-full group-hover:scale-105 transition-transform">
-                    <ArrowRight className="w-5 shadow-[0_0_15px_rgba(255,255,255,0.4)] h-5" strokeWidth={2.5} />
-                  </div>
-                  <span className="font-medium text-base">Explore My Dashboard</span>
-                </button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button 
+                    onClick={scrollToDashboard}
+                    className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/10 p-1.5 pr-6 rounded-full hover:bg-white/20 transition-colors group cursor-pointer"
+                  >
+                    <div className="bg-white text-black p-2 rounded-full group-hover:scale-105 transition-transform">
+                      <ArrowRight className="w-5 shadow-[0_0_15px_rgba(255,255,255,0.4)] h-5" strokeWidth={2.5} />
+                    </div>
+                    <span className="font-medium text-base">Explore My Dashboard</span>
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setActiveTab('Contact');
+                      scrollToDashboard();
+                    }}
+                    className="flex items-center gap-4 bg-purple-600 border border-purple-500/50 p-1.5 pr-6 rounded-full hover:bg-purple-500 transition-colors group cursor-pointer shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+                  >
+                    <div className="bg-white text-purple-600 p-2 rounded-full group-hover:scale-105 transition-transform">
+                      <Mail className="w-5 h-5" strokeWidth={2.5} />
+                    </div>
+                    <span className="font-bold text-base uppercase tracking-wider">Hire Me</span>
+                  </button>
+                </div>
               </motion.div>
 
             </div>
@@ -1182,7 +1270,105 @@ export default function App() {
             </div>
           )}
 
-          {activeTab !== 'About' && activeTab !== 'Testimonies' && activeTab !== 'Contact' && activeTab !== 'Graphic Design Works' && (
+          {activeTab === 'Video Editing Works' && (
+            <div className="w-full bg-[#0a0a0a] min-h-[calc(100vh-100px)] relative overflow-hidden flex flex-col items-center justify-center p-8 lg:p-12">
+              <div className="w-full max-w-6xl">
+                <div className="relative aspect-[16/9] md:aspect-[16/8] bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+                  {/* Visual/Image Side */}
+                  <div className="w-full md:w-1/2 relative bg-black/40">
+                    <motion.img 
+                      key={VIDEO_CASE_STUDIES[currentVideoSlide].image}
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.8 }}
+                      src={VIDEO_CASE_STUDIES[currentVideoSlide].image} 
+                      className="w-full h-full object-cover"
+                      alt=""
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+                  </div>
+
+                  {/* Content Side */}
+                  <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative bg-gradient-to-br from-white/[0.05] to-transparent">
+                    <motion.div
+                      key={VIDEO_CASE_STUDIES[currentVideoSlide].id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex flex-col h-full"
+                    >
+                      <span className="text-purple-400 text-xs font-black tracking-[4px] uppercase mb-4">
+                        {VIDEO_CASE_STUDIES[currentVideoSlide].label}
+                      </span>
+                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black italic tracking-tighter text-white mb-6 uppercase" style={{ fontFamily: 'Impact, sans-serif' }}>
+                        {VIDEO_CASE_STUDIES[currentVideoSlide].title}
+                      </h2>
+                      <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8 font-medium">
+                        {VIDEO_CASE_STUDIES[currentVideoSlide].summary}
+                      </p>
+
+                      <div className="flex flex-wrap gap-3 mb-10">
+                        {VIDEO_CASE_STUDIES[currentVideoSlide].highlights.map((tag, i) => (
+                          <span key={i} className="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold text-white/50 tracking-widest uppercase">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="mt-auto">
+                        <a 
+                          href={VIDEO_CASE_STUDIES[currentVideoSlide].link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-4 bg-white text-black px-10 py-4 rounded-full font-black uppercase tracking-[2px] text-xs hover:bg-purple-500 hover:text-white transition-all shadow-xl hover:shadow-purple-500/20"
+                        >
+                          WATCH VIDEO
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </motion.div>
+
+                    {/* Navigation Buttons (Local to content for better UX) */}
+                    <div className="absolute bottom-10 right-10 flex items-center gap-4">
+                      <button 
+                        onClick={() => setCurrentVideoSlide(prev => (prev - 1 + VIDEO_CASE_STUDIES.length) % VIDEO_CASE_STUDIES.length)}
+                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+                      >
+                        <ArrowRight className="w-5 h-5 rotate-180" />
+                      </button>
+                      <div className="flex gap-2">
+                        {VIDEO_CASE_STUDIES.map((_, i) => (
+                          <div 
+                            key={i} 
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${currentVideoSlide === i ? 'w-6 bg-purple-500' : 'bg-white/20'}`}
+                          />
+                        ))}
+                      </div>
+                      <button 
+                        onClick={() => setCurrentVideoSlide(prev => (prev + 1) % VIDEO_CASE_STUDIES.length)}
+                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+                      >
+                        <ArrowRight className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Deck Navigation/Indicator outside */}
+                <div className="mt-12 flex justify-between items-center text-white/20">
+                  <div className="text-[10px] font-black tracking-[4px] uppercase">
+                    Slide {currentVideoSlide + 1} / {VIDEO_CASE_STUDIES.length}
+                  </div>
+                  <div className="h-[1px] flex-1 mx-8 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                  <div className="text-[10px] font-black tracking-[4px] uppercase italic">
+                    Case Study Presentation Board
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab !== 'About' && activeTab !== 'Testimonies' && activeTab !== 'Contact' && activeTab !== 'Graphic Design Works' && activeTab !== 'Video Editing Works' && (
             <div className="p-8 flex items-center justify-center h-full min-h-[400px]">
               <div className="text-center flex flex-col items-center gap-4">
                 <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
@@ -1237,14 +1423,14 @@ export default function App() {
                 
                 <div className="flex items-center gap-4">
                   {/* Social Icons */}
-                  <a href="#" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                  <a href="https://www.facebook.com/profile.php?id=61574558286050" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
                     <Facebook className="w-4 h-4 text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                  <a href="https://www.instagram.com/socialpulse.va/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
                     <Instagram className="w-4 h-4 text-white" />
                   </a>
 
-                  <a href="#" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                  <a href="https://www.linkedin.com/in/harvey-lingad-273b53251/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center hover:bg-purple-600 transition-colors">
                     <Linkedin className="w-4 h-4 text-white" />
                   </a>
                 </div>
