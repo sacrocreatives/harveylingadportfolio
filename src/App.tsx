@@ -50,6 +50,7 @@ const CONTACT_CONFIG = {
 const GRAPHIC_CATEGORIES = ['All', 'Social Media Posts', 'Carousel Design', 'Ad Creatives', 'Thumbnails', 'Campaign Visuals'];
 
 const GRAPHIC_PROJECTS = [
+  // priority 1: carousels
   {
     id: 9,
     title: "Darna Personal Project",
@@ -113,6 +114,147 @@ const GRAPHIC_PROJECTS = [
     tags: ["Psychology", "Minimalist"],
     link: "#"
   },
+  // priority 2: social media
+  {
+    id: 12,
+    title: "Gym Shirt Promotion",
+    category: "Social Media Posts",
+    description: "Gym Shirt Promotion inspired by Anime aesthetics for high energy and engagement.",
+    image: "/works/Images/Social Media/1.jpg",
+    images: ["/works/Images/Social Media/1.jpg"],
+    platform: "Meta",
+    tools: ["Photoshop"],
+    tags: ["Anime", "Fitness"],
+    link: "#"
+  },
+  {
+    id: 13,
+    title: "Partnership Gym Shirt Promotion",
+    category: "Social Media Posts",
+    description: "Gym Shirt Promotion inspired by Anime, highlighting collaboration and brand synergy.",
+    image: "/works/Images/Social Media/2.jpg",
+    images: ["/works/Images/Social Media/2.jpg"],
+    platform: "Meta",
+    tools: ["Photoshop"],
+    tags: ["Anime", "Partnership"],
+    link: "#"
+  },
+  {
+    id: 14,
+    title: "VR Game Promotion",
+    category: "Social Media Posts",
+    description: "Online VR Game Social Media Promotion designed for a futuristic and immersive feel.",
+    image: "/works/Images/Social Media/3.png",
+    images: ["/works/Images/Social Media/3.png", "/works/Images/Social Media/3.1.png"],
+    platform: "Meta",
+    tools: ["Photoshop"],
+    tags: ["VR", "Gaming"],
+    link: "#"
+  },
+  {
+    id: 15,
+    title: "10k Subscribers Celebration",
+    category: "Social Media Posts",
+    description: "Milestone celebration creative for reaching a 10k follower base.",
+    image: "/works/Images/Social Media/4.jpg",
+    images: ["/works/Images/Social Media/4.jpg"],
+    platform: "YouTube",
+    tools: ["Photoshop"],
+    tags: ["Milestone", "Community"],
+    link: "#"
+  },
+  {
+    id: 16,
+    title: "Professional Banner Samples",
+    category: "Social Media Posts",
+    description: "Curated collection of banner samples showing versatile design styles.",
+    image: "/works/Images/Social Media/6.jpg",
+    images: ["/works/Images/Social Media/6.jpg", "/works/Images/Social Media/5.png"],
+    platform: "Meta",
+    tools: ["Photoshop"],
+    tags: ["Branding", "Layout"],
+    link: "#"
+  },
+  {
+    id: 17,
+    title: "TCG Shop Grand Opening",
+    category: "Social Media Posts",
+    description: "Visual identity and promotion for a TCG shop grand opening event.",
+    image: "/works/Images/Social Media/7.png",
+    images: ["/works/Images/Social Media/7.png"],
+    platform: "Meta",
+    tools: ["Photoshop"],
+    tags: ["TCG", "Event"],
+    link: "#"
+  },
+  {
+    id: 18,
+    title: "Gaming Content Pack",
+    category: "Social Media Posts",
+    description: "A wide variety of high-impact gaming posts for social media engagement.",
+    image: "/works/Images/Social Media/8.png",
+    images: [
+      "/works/Images/Social Media/8.png", 
+      "/works/Images/Social Media/8.1.png", 
+      "/works/Images/Social Media/8.2.jpg", 
+      "/works/Images/Social Media/8.3.png", 
+      "/works/Images/Social Media/8.4.png"
+    ],
+    platform: "Meta",
+    tools: ["Photoshop"],
+    tags: ["Gaming", "Dynamic"],
+    link: "#"
+  },
+  // priority 3: thumbnails
+  {
+    id: 19,
+    title: "Horizontal Content Thumbnails",
+    category: "Thumbnails",
+    description: "High-CTR horizontal thumbnails designed for YouTube video optimization.",
+    image: "/works/Images/Thumbnails/wide1.jpg",
+    images: ["/works/Images/Thumbnails/wide1.jpg"],
+    platform: "YouTube",
+    tools: ["Photoshop"],
+    tags: ["Youtube", "CTR"],
+    link: "#"
+  },
+  {
+    id: 20,
+    title: "Branded Horizontal Series",
+    category: "Thumbnails",
+    description: "Consistent branding applied to a series of horizontal content thumbnails.",
+    image: "/works/Images/Thumbnails/wide2.jpg",
+    images: ["/works/Images/Thumbnails/wide2.jpg", "/works/Images/Thumbnails/wide3.jpg", "/works/Images/Thumbnails/wide4.jpg", "/works/Images/Thumbnails/wide5.jpg"],
+    platform: "YouTube",
+    tools: ["Photoshop"],
+    tags: ["Consistent Branding"],
+    link: "#"
+  },
+  {
+    id: 21,
+    title: "Short-form Vertical Kit",
+    category: "Thumbnails",
+    description: "Vertical thumbnails optimized for TikTok and Reels high-retention content.",
+    image: "/works/Images/Thumbnails/vertical1.png",
+    images: ["/works/Images/Thumbnails/vertical1.png", "/works/Images/Thumbnails/vertical2.png"],
+    platform: "TikTok",
+    tools: ["Photoshop"],
+    tags: ["Consistent Branding", "Tiktok"],
+    link: "#"
+  },
+  {
+    id: 22,
+    title: "Meme/Trendy Vertical Kit",
+    category: "Thumbnails",
+    description: "Fast-paced, trendy vertical thumbnails designed for maximum viral potential.",
+    image: "/works/Images/Thumbnails/vertical3.jpg",
+    images: ["/works/Images/Thumbnails/vertical3.jpg", "/works/Images/Thumbnails/vertical4.jpg", "/works/Images/Thumbnails/vertical5.jpg", "/works/Images/Thumbnails/vertical6.jpg"],
+    platform: "YouTube Shorts",
+    tools: ["Photoshop"],
+    tags: ["Trendy", "Viral"],
+    link: "#"
+  },
+  // priority 4: campaigns
   {
     id: 4,
     title: "Hobby Store Local Tournaments",
@@ -184,6 +326,7 @@ const GRAPHIC_PROJECTS = [
     tags: ["Gaming", "UI/UX"],
     link: "#"
   },
+  // priority 5: ads
   {
     id: 1,
     title: "Lead Magnet",
@@ -233,10 +376,16 @@ export default function App() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [visibleItems, setVisibleItems] = useState(6);
 
   const filteredProjects = GRAPHIC_PROJECTS.filter(p => 
     selectedCategory === 'All' || p.category === selectedCategory
   );
+
+  // For the 'All' page specifically, we might want to respect the visibleItems limit
+  const projectsToShow = selectedCategory === 'All' 
+    ? filteredProjects.slice(0, visibleItems) 
+    : filteredProjects;
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -895,7 +1044,7 @@ export default function App() {
 
               {/* Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredProjects.map((project) => (
+                {projectsToShow.map((project) => (
                   <motion.div
                     layout
                     initial={{ opacity: 0 }}
@@ -929,6 +1078,21 @@ export default function App() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* View More Button */}
+              {selectedCategory === 'All' && visibleItems < filteredProjects.length && (
+                <div className="mt-16 flex justify-center">
+                  <button 
+                    onClick={() => setVisibleItems(prev => prev + 6)}
+                    className="group flex flex-col items-center gap-4 text-white/40 hover:text-white transition-all"
+                  >
+                    <span className="text-[10px] uppercase font-black tracking-[4px] ml-1">View More Projects</span>
+                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-purple-500 group-hover:bg-purple-500/10 transition-all">
+                      <ArrowRight className="w-5 h-5 rotate-90" />
+                    </div>
+                  </button>
+                </div>
+              )}
 
               {/* Project Details Modal */}
               {selectedProject && (
