@@ -318,16 +318,16 @@ export default function App() {
                       <h4 className="text-sm font-semibold uppercase tracking-wider text-purple-300 mb-4 bg-purple-500/20 inline-block px-3 py-1 rounded-md">Main Tools</h4>
                       <div className="flex flex-col gap-4">
                         {[
-                          { name: 'Adobe Photoshop', icon: 'Ps', color: 'bg-blue-600', val: 90 },
-                          { name: 'Figma', icon: 'Fg', color: 'bg-pink-500', val: 85 },
-                          { name: 'Canva Pro', icon: 'C', color: 'bg-cyan-500', val: 95 },
-                          { name: 'Adobe Premiere Pro', icon: 'Pr', color: 'bg-purple-600', val: 88 },
-                          { name: 'Adobe After Effects', icon: 'Ae', color: 'bg-indigo-600', val: 75 },
-                          { name: 'Capcut Pro', icon: 'Cp', color: 'bg-white text-black', val: 92 },
+                          { name: 'Adobe Photoshop', icon: '/logos/photoshop.png', val: 90 },
+                          { name: 'Figma', icon: '/logos/figma.png', val: 85 },
+                          { name: 'Canva Pro', icon: '/logos/canva.png', val: 95 },
+                          { name: 'Adobe Premiere Pro', icon: '/logos/premiere.png', val: 88 },
+                          { name: 'Adobe After Effects', icon: '/logos/after-effects.png', val: 75 },
+                          { name: 'Capcut Pro', icon: '/logos/capcut.png', val: 92 },
                         ].map((tool, i) => (
                           <div key={i} className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs ${tool.color} ${tool.name === 'Capcut Pro' ? '' : 'text-white'}`}>
-                              {tool.icon}
+                            <div className="w-8 h-8 rounded-md flex items-center justify-center overflow-hidden bg-white/5 border border-white/10">
+                              <img src={tool.icon} alt={tool.name} className="w-full h-full object-contain" />
                             </div>
                             <div className="flex-1">
                               <div className="flex justify-between mb-1">
@@ -347,10 +347,16 @@ export default function App() {
                       <div>
                         <h4 className="text-sm font-semibold uppercase tracking-wider text-teal-300 mb-4 bg-teal-500/20 inline-block px-3 py-1 rounded-md">Other Tools</h4>
                         <div className="flex gap-3 flex-wrap">
-                          <div className="w-10 h-10 rounded-md bg-white/10 flex items-center justify-center border border-white/20 text-xl">🤖</div>
-                          <div className="w-10 h-10 rounded-md bg-white/10 flex items-center justify-center border border-white/20 text-xl">⛵</div>
-                          <div className="w-10 h-10 rounded-md bg-white/10 flex items-center justify-center border border-white/20 text-xl font-bold text-orange-500">O</div>
-                          <div className="w-10 h-10 rounded-md bg-white/10 flex items-center justify-center border border-white/20 text-xl font-bold text-orange-400">Ai</div>
+                          {[
+                            { name: 'ChatGPT', icon: '/logos/chatgpt.png' },
+                            { name: 'Midjourney', icon: '/logos/midjourney.png' },
+                            { name: 'OpenShot', icon: '/logos/openshot.png' },
+                            { name: 'Illustrator', icon: '/logos/illustrator.png' },
+                          ].map((tool, i) => (
+                            <div key={i} className="w-10 h-10 rounded-md bg-white/10 flex items-center justify-center border border-white/20 overflow-hidden" title={tool.name}>
+                              <img src={tool.icon} alt={tool.name} className="w-full h-full object-contain p-1.5" />
+                            </div>
+                          ))}
                         </div>
                       </div>
                       <p className="text-xs text-white/60 leading-relaxed">
