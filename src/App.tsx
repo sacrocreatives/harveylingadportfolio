@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, ArrowRight, User, Image as ImageIcon, Video, MessageSquare, Mail, MoreHorizontal, CheckCircle2, Search, Bell, Facebook, Instagram, Linkedin, Heart } from 'lucide-react';
+import { Menu, ArrowRight, User, Image as ImageIcon, Video, MessageSquare, Mail, MoreHorizontal, CheckCircle2, Search, Bell, Facebook, Instagram, Linkedin, Heart, Play, X } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const testimonials = [
@@ -373,29 +373,62 @@ const GRAPHIC_PROJECTS = [
 const VIDEO_CASE_STUDIES = [
   {
     id: 1,
-    label: "CASE STUDY 01",
-    title: "Real Estate Video Ads",
-    summary: "Produced a series of high-conversion short-form video ads for a real estate company, strategically crafted for Meta & Tiktok Ads. The campaign significantly boosted lead generation with a focused creative direction.",
-    highlights: ["120+ Leads Generated", "15% Conversion Rate", "Meta & TikTok Optimized"],
-    image: "/works/Video/case-1-hero.jpg",
+    label: "TikTok Video",
+    title: "Squidgame Video",
+    summary: "Interview Video featuring Squidgame concepts with custom SVG animations.",
+    highlights: ["Svg Animation", "TikTok Optimized", "Engaging Narrative"],
+    image: "/works/Video/Cover.png",
+    video: "/works/Video/v1.mp4",
     link: "#"
   },
   {
     id: 2,
-    label: "CASE STUDY 02",
-    title: "Smart Cuts Storytelling",
-    summary: "A masterclass in repurposing long-form content into engaging short-form snippets. Tasked with trimming 30-minute videos without losing the core narrative arc and impact.",
-    highlights: ["Multi-platform Ready", "Narrative Focused", "High Retension Edits"],
-    image: "/works/Video/case-2-hero.jpg",
+    label: "TikTok Video",
+    title: "Bizfile",
+    summary: "Professional screen recording and UI animation for Bizfile platform presentation.",
+    highlights: ["Screen Recording", "UI Animation", "Smooth Transitions"],
+    image: "/works/Video/Cover 2.png",
+    video: "/works/Video/4 - Bizfile v1.mp4",
     link: "#"
   },
   {
     id: 3,
-    label: "CAMPAIGN WORK",
-    title: "Recruitment Strategy",
-    summary: "Executed a high-performing recruitment campaign in-house, collaborating with cross-border teams to drive 148 potential agents through strategic ad buying and WhatsApp outreach.",
-    highlights: ["148 Potential Agents", "WhatsApp Integrated", "Remote Team Success"],
-    image: "/works/Video/case-3-hero.jpg",
+    label: "Motion Graphics",
+    title: "IG New Size Trend",
+    summary: "A professional motion graphics video based on the new size trend of Instagram, created with After Effects from scratch.",
+    highlights: ["After Effects", "Motion Graphics", "Trend-ready"],
+    image: "/works/Video/Ig new Size Cover.png",
+    video: "/works/Video/IG New Size Trend.mp4",
+    link: "https://www.instagram.com/p/DPIEOPCk0kl/"
+  },
+  {
+    id: 4,
+    label: "Motion Graphics",
+    title: "Services Promotion",
+    summary: "A high-impact motion graphics video for promoting company services with professional aesthetics.",
+    highlights: ["After Effects", "Brand Promotion", "Motion Design"],
+    image: "/works/Video/Artboard 1.jpg",
+    video: "/works/Video/Offshore MoGraph1_1.mp4",
+    link: "https://www.instagram.com/p/DOvIAWNiF3M/"
+  },
+  {
+    id: 5,
+    label: "YouTube Shorts",
+    title: "Rock Lee Video",
+    summary: "High-energy YouTube Shorts featuring Rock Lee with sophisticated UI animations.",
+    highlights: ["UI Animations", "Anime Style", "Fast-paced Edit"],
+    image: "/works/Video/2 Shorts - Team Might Guy.jpg",
+    video: "/works/Video/2 Shorts - Team Might Guy V2.mp4",
+    link: "#"
+  },
+  {
+    id: 6,
+    label: "Stream Clip Video",
+    title: "10k Gift Celebration",
+    summary: "Trendy stream clip celebration for 10k milestone, optimized for high retention.",
+    highlights: ["Trendy Edits", "Engagement Focused", "Social Media Ready"],
+    image: "/works/Video/4 - 10k Gifts 2.jpg",
+    video: "/works/Video/Sean 10k Gift V1.mp4",
     link: "#"
   }
 ];
@@ -414,6 +447,7 @@ export default function App() {
   });
   const [currentVideoSlide, setCurrentVideoSlide] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   const toggleLike = (id: number) => {
     const newLikes = { ...likedProjects, [id]: !likedProjects[id] };
@@ -1271,100 +1305,193 @@ export default function App() {
           )}
 
           {activeTab === 'Video Editing Works' && (
-            <div className="w-full bg-[#0a0a0a] min-h-[calc(100vh-100px)] relative overflow-hidden flex flex-col items-center justify-center p-8 lg:p-12">
-              <div className="w-full max-w-6xl">
-                <div className="relative aspect-[16/9] md:aspect-[16/8] bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row">
-                  {/* Visual/Image Side */}
-                  <div className="w-full md:w-1/2 relative bg-black/40">
-                    <motion.img 
-                      key={VIDEO_CASE_STUDIES[currentVideoSlide].image}
-                      initial={{ opacity: 0, scale: 1.1 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.8 }}
-                      src={VIDEO_CASE_STUDIES[currentVideoSlide].image} 
-                      className="w-full h-full object-cover"
-                      alt=""
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-                  </div>
+            <div className="w-full bg-[#050505] min-h-[calc(100vh-100px)] relative overflow-hidden flex flex-col items-center justify-center p-6 md:p-12">
+              {/* Background Ambient Glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+              <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-teal-600/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-                  {/* Content Side */}
-                  <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative bg-gradient-to-br from-white/[0.05] to-transparent">
-                    <motion.div
-                      key={VIDEO_CASE_STUDIES[currentVideoSlide].id}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="flex flex-col h-full"
-                    >
-                      <span className="text-purple-400 text-xs font-black tracking-[4px] uppercase mb-4">
-                        {VIDEO_CASE_STUDIES[currentVideoSlide].label}
-                      </span>
-                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black italic tracking-tighter text-white mb-6 uppercase" style={{ fontFamily: 'Impact, sans-serif' }}>
-                        {VIDEO_CASE_STUDIES[currentVideoSlide].title}
-                      </h2>
-                      <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8 font-medium">
-                        {VIDEO_CASE_STUDIES[currentVideoSlide].summary}
-                      </p>
-
-                      <div className="flex flex-wrap gap-3 mb-10">
-                        {VIDEO_CASE_STUDIES[currentVideoSlide].highlights.map((tag, i) => (
-                          <span key={i} className="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold text-white/50 tracking-widest uppercase">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="mt-auto">
-                        <a 
-                          href={VIDEO_CASE_STUDIES[currentVideoSlide].link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-4 bg-white text-black px-10 py-4 rounded-full font-black uppercase tracking-[2px] text-xs hover:bg-purple-500 hover:text-white transition-all shadow-xl hover:shadow-purple-500/20"
-                        >
-                          WATCH VIDEO
-                          <ArrowRight className="w-4 h-4" />
-                        </a>
-                      </div>
-                    </motion.div>
-
-                    {/* Navigation Buttons (Local to content for better UX) */}
-                    <div className="absolute bottom-10 right-10 flex items-center gap-4">
-                      <button 
-                        onClick={() => setCurrentVideoSlide(prev => (prev - 1 + VIDEO_CASE_STUDIES.length) % VIDEO_CASE_STUDIES.length)}
-                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white/60 hover:text-white"
-                      >
-                        <ArrowRight className="w-5 h-5 rotate-180" />
-                      </button>
-                      <div className="flex gap-2">
-                        {VIDEO_CASE_STUDIES.map((_, i) => (
-                          <div 
-                            key={i} 
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${currentVideoSlide === i ? 'w-6 bg-purple-500' : 'bg-white/20'}`}
-                          />
-                        ))}
-                      </div>
-                      <button 
-                        onClick={() => setCurrentVideoSlide(prev => (prev + 1) % VIDEO_CASE_STUDIES.length)}
-                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white/60 hover:text-white"
-                      >
-                        <ArrowRight className="w-5 h-5" />
-                      </button>
+              <div className="w-full max-w-7xl z-10">
+                <div className="flex flex-col gap-10">
+                  {/* Header Title */}
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-4">
+                    <div>
+                      <h2 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white mb-2" style={{ fontFamily: 'Impact, sans-serif' }}>VIDEO EDITING WORKS</h2>
+                      <p className="text-white/40 font-medium tracking-wide uppercase text-sm">Cinematic Presentation • Social Media Strategy • High-Impact Edits</p>
+                    </div>
+                    <div className="flex items-center gap-4 text-white/20 font-black text-xs tracking-[4px]">
+                      <span>{String(currentVideoSlide + 1).padStart(2, '0')}</span>
+                      <div className="w-12 h-[1px] bg-white/10"></div>
+                      <span>{String(VIDEO_CASE_STUDIES.length).padStart(2, '0')}</span>
                     </div>
                   </div>
-                </div>
 
-                {/* Deck Navigation/Indicator outside */}
-                <div className="mt-12 flex justify-between items-center text-white/20">
-                  <div className="text-[10px] font-black tracking-[4px] uppercase">
-                    Slide {currentVideoSlide + 1} / {VIDEO_CASE_STUDIES.length}
+                  {/* Main Presentation Board */}
+                  <div className="relative aspect-[16/9] md:aspect-[21/9] bg-white/[0.02] backdrop-blur-3xl border border-white/10 rounded-[48px] overflow-hidden shadow-2xl flex flex-col md:flex-row cursor-default group/board">
+                    {/* Visual Side */}
+                    <div className="w-full md:w-3/5 h-2/3 md:h-full relative overflow-hidden">
+                      <motion.div
+                        key={VIDEO_CASE_STUDIES[currentVideoSlide].image}
+                        initial={{ opacity: 0, scale: 1.1 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="w-full h-full"
+                      >
+                        <img 
+                          src={VIDEO_CASE_STUDIES[currentVideoSlide].image} 
+                          className="w-full h-full object-cover grayscale-[0.3] group-hover/board:grayscale-0 transition-all duration-700 group-hover/board:scale-105"
+                          alt=""
+                        />
+                      </motion.div>
+                      
+                      {/* Gradient Overlays */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-transparent hidden md:block"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent md:hidden"></div>
+                      
+                      {/* Play Button Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/board:opacity-100 transition-opacity duration-300">
+                        <motion.button 
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          onClick={() => setSelectedVideo(VIDEO_CASE_STUDIES[currentVideoSlide].video)}
+                          className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white shadow-2xl"
+                        >
+                          <Play className="w-10 h-10 fill-current ml-1" />
+                        </motion.button>
+                      </div>
+                    </div>
+
+                    {/* Content Side */}
+                    <div className="w-full md:w-2/5 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative bg-gradient-to-br from-white/[0.03] to-transparent">
+                      <motion.div
+                        key={VIDEO_CASE_STUDIES[currentVideoSlide].id}
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="flex flex-col h-full"
+                      >
+                        <div className="flex items-center gap-3 mb-6">
+                           <span className="w-8 h-[1px] bg-purple-500"></span>
+                           <span className="text-purple-400 text-xs font-black tracking-[4px] uppercase">
+                            {VIDEO_CASE_STUDIES[currentVideoSlide].label}
+                          </span>
+                        </div>
+                        
+                        <h3 className="text-4xl md:text-5xl lg:text-6xl font-black italic tracking-tighter text-white mb-6 uppercase leading-none" style={{ fontFamily: 'Impact, sans-serif' }}>
+                          {VIDEO_CASE_STUDIES[currentVideoSlide].title}
+                        </h3>
+                        
+                        <p className="text-white/60 text-lg leading-relaxed mb-10 font-medium max-w-md">
+                          {VIDEO_CASE_STUDIES[currentVideoSlide].summary}
+                        </p>
+
+                        <div className="flex flex-wrap gap-3 mb-12">
+                          {VIDEO_CASE_STUDIES[currentVideoSlide].highlights.map((tag, i) => (
+                            <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-bold text-white/50 tracking-widest uppercase hover:bg-white/10 hover:text-white transition-colors">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="mt-auto flex flex-col sm:flex-row items-center gap-6">
+                          <button 
+                            onClick={() => setSelectedVideo(VIDEO_CASE_STUDIES[currentVideoSlide].video)}
+                            className="w-full sm:w-auto flex items-center justify-center gap-4 bg-white text-black px-10 py-5 rounded-full font-black uppercase tracking-[2px] text-xs hover:bg-purple-600 hover:text-white transition-all shadow-xl hover:shadow-purple-500/40 transform hover:-translate-y-1"
+                          >
+                            <Play className="w-4 h-4 fill-current" />
+                            WATCH REEL
+                          </button>
+                          
+                          {VIDEO_CASE_STUDIES[currentVideoSlide].link !== "#" && (
+                            <a 
+                              href={VIDEO_CASE_STUDIES[currentVideoSlide].link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-white/40 hover:text-teal-400 font-bold uppercase tracking-widest text-xs border-b border-white/10 hover:border-teal-400 transition-all py-1 pb-2"
+                            >
+                              External Link
+                            </a>
+                          )}
+                        </div>
+                      </motion.div>
+
+                      {/* Side Controls */}
+                      <div className="absolute bottom-10 right-10 flex flex-col gap-4">
+                        <button 
+                          onClick={() => setCurrentVideoSlide(prev => (prev - 1 + VIDEO_CASE_STUDIES.length) % VIDEO_CASE_STUDIES.length)}
+                          className="w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all text-white/40 hover:text-white group"
+                        >
+                          <ArrowRight className="w-6 h-6 rotate-180 group-active:scale-90 transition-transform" />
+                        </button>
+                        <button 
+                          onClick={() => setCurrentVideoSlide(prev => (prev + 1) % VIDEO_CASE_STUDIES.length)}
+                          className="w-14 h-14 rounded-2xl bg-purple-600 flex items-center justify-center hover:bg-purple-500 transition-all text-white group shadow-lg shadow-purple-600/20"
+                        >
+                          <ArrowRight className="w-6 h-6 group-active:scale-90 transition-transform" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="h-[1px] flex-1 mx-8 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-                  <div className="text-[10px] font-black tracking-[4px] uppercase italic">
-                    Case Study Presentation Board
+
+                  {/* Thumbnail Strip / Navigation Indicator */}
+                  <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+                    {VIDEO_CASE_STUDIES.map((item, i) => (
+                      <button 
+                        key={i}
+                        onClick={() => setCurrentVideoSlide(i)}
+                        className={`group relative aspect-video rounded-2xl overflow-hidden border transition-all duration-500 ${currentVideoSlide === i ? 'border-purple-500 ring-2 ring-purple-500/20 scale-105 z-10' : 'border-white/10 opacity-40 hover:opacity-100'}`}
+                      >
+                        <img src={item.image} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="" />
+                        <div className={`absolute inset-0 bg-purple-600/20 transition-opacity duration-300 ${currentVideoSlide === i ? 'opacity-100' : 'opacity-0'}`}></div>
+                        <div className="absolute bottom-2 left-3 text-[8px] font-black tracking-[2px] uppercase text-white/80 drop-shadow-md">
+                          Slide {i + 1}
+                        </div>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {activeTab !== 'About' && activeTab !== 'Testimonies' && activeTab !== 'Contact' && activeTab !== 'Graphic Design Works' && activeTab !== 'Video Editing Works' && (
+            <div className="p-8 flex items-center justify-center h-full min-h-[400px]">
+              <div className="text-center flex flex-col items-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                  <span className="text-2xl text-white/40">🚧</span>
+                </div>
+                <h2 className="text-2xl font-bold text-white/80">{activeTab}</h2>
+                <p className="text-white/50 max-w-md">This section is currently under construction. Please check back later or view the About section.</p>
+              </div>
+            </div>
+          )}
+
+          {/* Video Modal Overlay */}
+          {selectedVideo && (
+            <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4 md:p-10">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                onClick={() => setSelectedVideo(null)}
+                className="absolute inset-0 bg-black/95 backdrop-blur-2xl"
+              />
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                className="relative w-full max-w-6xl aspect-video bg-black rounded-[40px] overflow-hidden shadow-2xl border border-white/5"
+              >
+                <button 
+                  onClick={() => setSelectedVideo(null)}
+                  className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                <video 
+                  src={selectedVideo} 
+                  controls 
+                  autoPlay 
+                  className="w-full h-full"
+                />
+              </motion.div>
             </div>
           )}
 
